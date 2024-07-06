@@ -1,5 +1,5 @@
 "use client";
-import React, { use } from "react";
+import React, { use, useEffect } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { axios } from "axios";
@@ -11,7 +11,23 @@ export default function SignUpPage() {
     username: "",
   });
 
-  const onSignup = async () => {};
+  const [buttonDissable, setButtonDissable] = React.useState(false);
+  const [loading, setLoading] = React.useState(false);
+  const onSignup = async () => {
+    try {
+    } catch (error) {
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    if (user.username.length > 0) {
+      setButtonDissable(false);
+    } else {
+      setButtonDissable(true);
+    }
+  }, [user]);
 
   return (
     <div
@@ -24,7 +40,7 @@ export default function SignUpPage() {
       mb-4
       "
       >
-        SignUp
+        {loading ? "Procesing" : "SignUp"}
       </h1>
       <hr />
       <label htmlFor="username">UseName</label>
@@ -68,7 +84,7 @@ export default function SignUpPage() {
       "
         onClick={onSignup}
       >
-        SignUp
+        {buttonDissable ? "signup" : "SignUp"}
       </button>
       <Link href="/login"> Already You have account login here</Link>
     </div>
