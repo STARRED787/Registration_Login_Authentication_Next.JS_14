@@ -2,9 +2,11 @@
 import React, { use, useEffect } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { axios } from "axios";
+import axios from "axios";
+import { toast } from "react-toastify";
 
 export default function SignUpPage() {
+  const router = useRouter();
   const [user, setUser] = React.useState({
     email: "",
     password: "",
@@ -15,7 +17,13 @@ export default function SignUpPage() {
   const [loading, setLoading] = React.useState(false);
   const onSignup = async () => {
     try {
-    } catch (error) {
+      setLoading(true);
+      const response = await axios.post("/api/users/signup", user);
+      console.log("SingnUp Success", response.data);
+      router.push("/login");
+    } catch (error: any) {
+      console.log(error);
+      toast.error("SignUp error", error.massage);
     } finally {
       setLoading(false);
     }
