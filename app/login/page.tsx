@@ -59,7 +59,7 @@ export default function LoginPage() {
       >
         SignUp
       </button>
-      <Link href="/login"> You dont Have Acount Please Regiter</Link>
+      <Link href="/signup"> You dont Have Account Register here</Link>
     </div>
   );
 }

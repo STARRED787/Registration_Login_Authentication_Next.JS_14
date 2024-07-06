@@ -70,7 +70,7 @@ export default function SignUpPage() {
       >
         SignUp
       </button>
-      <Link href="/login"> Visit to login</Link>
+      <Link href="/login"> Already You have account login here</Link>
     </div>
   );
 }
