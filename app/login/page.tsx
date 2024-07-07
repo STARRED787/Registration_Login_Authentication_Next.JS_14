@@ -1,16 +1,42 @@
 "use client";
-import React, { use } from "react";
+import React, { use, useEffect } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { axios } from "axios";
+import Axios from "axios";
+import { toast } from "react-toastify";
 
 export default function LoginPage() {
+  const router = useRouter();
   const [user, setUser] = React.useState({
     email: "",
     password: "",
   });
 
-  const onLogin = async () => {};
+  const [ButtonDisable, setButtonDisable] = React.useState(false);
+  const [loadin, setLoading] = React.useState(false);
+
+  const onLogin = async () => {
+    try {
+      setLoading(true);
+      const response = await Axios.post("/api/users/login", user);
+      console.log("Login success", response.data);
+      toast.success("Login success Welcome");
+      router.push("/dashboard");
+    } catch (error: any) {
+      console.log("login failed", error.message);
+      toast.error(error.message);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    if (user.email.length > 0 && user.password.length > 0) {
+      setButtonDisable(false);
+    } else {
+      setButtonDisable(true);
+    }
+  }, [user]);
 
   return (
     <div
