@@ -13,7 +13,7 @@ export default function LoginPage() {
   });
 
   const [ButtonDisable, setButtonDisable] = React.useState(false);
-  const [loadin, setLoading] = React.useState(false);
+  const [loading, setLoading] = React.useState(false);
 
   const onLogin = async () => {
     try {
@@ -21,7 +21,7 @@ export default function LoginPage() {
       const response = await Axios.post("/api/users/login", user);
       console.log("Login success", response.data);
       toast.success("Login success Welcome");
-      router.push("/dashboard");
+      router.push("/profile");
     } catch (error: any) {
       console.log("login failed", error.message);
       toast.error(error.message);
@@ -49,7 +49,7 @@ export default function LoginPage() {
       mb-4
       "
       >
-        Loging
+        {loading ? "Processing" : "LogIn"}
       </h1>
       <hr />
 
@@ -83,7 +83,7 @@ export default function LoginPage() {
       "
         onClick={onLogin}
       >
-        SignUp
+        {ButtonDisable ? "login" : "Login"}
       </button>
       <Link href="/signup"> You dont Have Account Register here</Link>
     </div>
