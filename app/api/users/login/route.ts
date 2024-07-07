@@ -3,6 +3,7 @@ import { connect } from "@/dbconfig/dbconfig";
 import User from "@/models/userModels";
 import { NextRequest, NextResponse } from "next/server";
 import { error } from "console";
+import jwt from "jsonwebtoken";
 
 connect();
 
@@ -32,6 +33,11 @@ export async function POST(request: NextRequest) {
       username: user.username,
       email: user.email,
     };
+
+    //create token
+    const token = await jwt.sign(tokenData, process.env.TOKEN_SECRET!, {
+      expiresIn: "1h",
+    });
   } catch (error: any) {
     return NextResponse.json({ error: error.message }, { status: 500 });
   }
