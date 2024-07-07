@@ -15,6 +15,13 @@ const Navbar = () => {
           Add Topic
         </Link>
       </nav>
+      <h1
+        className=" justify-center items-center flex
+       text-white text-4xl mt-4 "
+      >
+        {" "}
+        BASIC AUTHENTICATION NEXTJS
+      </h1>
     </div>
   );
 };
